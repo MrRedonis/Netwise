@@ -3,7 +3,7 @@ using Redonis.Netwise.Models;
 
 namespace Redonis.Netwise.Clients
 {
-	internal sealed class CatFactClient : ICatFactClient
+	public sealed class CatFactClient : ICatFactClient
 	{
 		private readonly HttpClient _httpClient;
 
@@ -19,7 +19,7 @@ namespace Redonis.Netwise.Clients
 			response.EnsureSuccessStatusCode();
 
 			return await response.Content.ReadFromJsonAsync<CatFact>(cancellationToken) 
-			       ?? throw new InvalidOperationException();
+			       ?? throw new InvalidOperationException("The API returned an empty response.");
 		}
 	}
 }

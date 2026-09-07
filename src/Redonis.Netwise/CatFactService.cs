@@ -15,10 +15,11 @@ namespace Redonis.Netwise
 			_fileWriter = fileWriter;
 		}
 
-		public async Task SaveRandomFactAsync(CancellationToken cancellationToken = default)
+		public async Task<string> SaveRandomFactAsync(CancellationToken cancellationToken = default)
 		{
 			var catFact = await _client.GetFactAsync(cancellationToken);
 			await _fileWriter.WriteAsync(catFact.Fact, cancellationToken);
+			return catFact.Fact;
 		}
 	}
 }

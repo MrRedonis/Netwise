@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Redonis.Netwise;
 using Redonis.Netwise.Clients;
+using Redonis.Netwise.Configuration;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -24,9 +25,10 @@ builder.Services.AddSingleton(sp =>
 });
 
 builder.Services.AddTransient<CatFactService>();
+builder.Services.AddTransient<ConsoleMenu>();
 
 using var host = builder.Build();
 
-var catFactService = host.Services.GetRequiredService<CatFactService>();
+var menu = host.Services.GetRequiredService<ConsoleMenu>();
 
-await catFactService.SaveRandomFactAsync();
+await menu.RunAsync();
